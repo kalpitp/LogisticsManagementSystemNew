@@ -22,9 +22,15 @@ namespace LogisticsManagement
                 .AddDbContext<CybageLogisticsContext>()
                 .AddScoped<IAuthenticationServices, AuthenticationServices>()
                 .AddScoped<IAuthenticationRepository, AuthenticationRepository>()
+                .AddScoped<IAdminServices, AdminServices>()
+                .AddScoped<IAdminRepository, AdminRepository>()
+
+
                 .BuildServiceProvider();
 
             var authService = serviceProvider.GetService<IAuthenticationServices>();
+            var adminService = serviceProvider.GetService<IAdminServices>();
+
 
 
             while (true)
@@ -35,7 +41,6 @@ namespace LogisticsManagement
                 Console.WriteLine("\n1. Login");
                 Console.WriteLine("2. Register");
                 Console.WriteLine("3. Exit");
-                //Console.WriteLine(authService.CurrentUser?.UserId + authService.CurrentUser?.Role);
 
 
                 Console.WriteLine("\nPlease enter your choice: ");
@@ -47,7 +52,8 @@ namespace LogisticsManagement
                     Console.ResetColor();
                 }
                 
-                AuthenticationMenu authMenu= new AuthenticationMenu(authService);
+                AuthenticationMenu authMenu= new AuthenticationMenu(authService, adminService);
+       
                 //CustomerMenu customerMenu= new CustomerMenu(authService);
                 //CustomerMenu.ShowMenu();
 

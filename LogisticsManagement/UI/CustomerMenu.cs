@@ -26,7 +26,6 @@ namespace LogisticsManagement.UI
         {
 
             Console.Clear();
-
             Console.WriteLine("\n<<<<<<< CUSTOMER MENU >>>>>>>>");
             Console.WriteLine("\n1. View Products");
             Console.WriteLine("2. View Orders");

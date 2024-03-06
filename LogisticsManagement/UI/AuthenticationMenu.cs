@@ -14,10 +14,12 @@ namespace LogisticsManagement.UI
     {
 
         private readonly IAuthenticationServices _authService;
+        private readonly IAdminServices _adminService;
 
-        public AuthenticationMenu(IAuthenticationServices authService)
+        public AuthenticationMenu(IAuthenticationServices authService, IAdminServices adminService)
         {
             _authService = authService;
+            _adminService = adminService;
         }
 
         // For converting password to stars
@@ -67,7 +69,7 @@ namespace LogisticsManagement.UI
                 if (isSuccess)
                 {
                     CommonServices.SuccessMessage("Login Successfull");
-                    if (_authService.CurrentUser.Role == "admin") new AdminMenu(_authService).ShowMenu();
+                    if (_authService.CurrentUser.Role == "admin") new AdminMenu(_authService, _adminService).ShowMenu();
                     else if (_authService.CurrentUser.Role == "manager") new ManagerMenu(_authService).ShowMenu();
                     else if (_authService.CurrentUser.Role == "customer") new CustomerMenu(_authService).ShowMenu();
                     else if (_authService.CurrentUser.Role == "driver") new DriverMenu(_authService).ShowMenu();

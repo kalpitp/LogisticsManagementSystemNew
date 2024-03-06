@@ -18,11 +18,15 @@ namespace LogisticsManagement.DataAccess.Repository
             _context = dbContext;
         }
 
-
         // get user by user id
         public User GetUserByUserId(string userId)
         {
            return  _context.Users.Include(u => u.Role).Include(u=>u.UserDetails).FirstOrDefault(u => u.Email == userId);
+        }
+
+        public User GetUserById(int userId)
+        {
+            return _context.Users.Include(u => u.UserDetails).FirstOrDefault(u => u.Id == userId);
         }
 
         // Add user to database
@@ -34,10 +38,7 @@ namespace LogisticsManagement.DataAccess.Repository
                 _context.UserDetails.Add(userDetail);
                 return _context.SaveChanges();
             }
-            catch(DbUpdateException)
-            {
-                Console.WriteLine("An Error occured while adding user");
-            }
+        
             catch (Exception)
             {
                 Console.WriteLine("An Error occured while adding user");
@@ -61,5 +62,7 @@ namespace LogisticsManagement.DataAccess.Repository
             var userDetails = _context.UserDetails.FirstOrDefault(u => u.UserId == userId);
             return userDetails != null ? Convert.ToInt32( userDetails.IsApproved) : 0; // Return IsApproved value or 0
         }
+
+     
     }
 }

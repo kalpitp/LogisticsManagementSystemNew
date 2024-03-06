@@ -56,6 +56,7 @@ namespace LogisticsManagement.Services.Service
                         {
                             UserId = user.Id,
                             UserEmail = user.Email,
+                            RoleId= user.RoleId,
                             Role = user.Role.Name
                         };
 

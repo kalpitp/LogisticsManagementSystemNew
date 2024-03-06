@@ -10,6 +10,9 @@ namespace LogisticsManagement.Services.DTOs
     {
         public int UserId { get; set; }
         public string UserEmail { get; set; }
+
+        public int RoleId { get; set; }
+
         public string Role { get; set; }
        // public int IsApproved {  get; set; }
     }

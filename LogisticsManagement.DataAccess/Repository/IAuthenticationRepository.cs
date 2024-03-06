@@ -13,6 +13,7 @@ namespace LogisticsManagement.DataAccess.Repository
 
         //For fetching user for login
         User GetUserByUserId(string userId);
+        User GetUserById(int userId);
 
         int AddUser(User user, UserDetail userDetail);
 
