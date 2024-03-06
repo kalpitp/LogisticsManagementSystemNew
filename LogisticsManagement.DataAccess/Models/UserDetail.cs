@@ -19,7 +19,7 @@ public partial class UserDetail
 
     public int? WarehouseId { get; set; }
 
-    public bool? IsApproved { get; set; }
+    public int? IsApproved { get; set; }
 
     public virtual User User { get; set; } = null!;
 

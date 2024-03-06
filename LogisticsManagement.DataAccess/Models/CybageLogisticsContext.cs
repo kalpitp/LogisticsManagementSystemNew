@@ -37,13 +37,13 @@ public partial class CybageLogisticsContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB;Database=CybageLogistics;Trusted_Connection=true;");
+        => optionsBuilder.UseSqlServer("Server=KALPITP-GIFT\\MSSQLSERVER2019;Database=CybageLogistics;User ID=sa;password=cybage@123456;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Inventory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Inventor__3214EC07540AC907");
+            entity.HasKey(e => e.Id).HasName("PK__Inventor__3214EC0792105C46");
 
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
@@ -55,12 +55,12 @@ public partial class CybageLogisticsContext : DbContext
             entity.HasOne(d => d.Warehouse).WithMany(p => p.Inventories)
                 .HasForeignKey(d => d.WarehouseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Inventori__Wareh__1367E606");
+                .HasConstraintName("FK__Inventori__Wareh__276EDEB3");
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Orders__3214EC070B7DF171");
+            entity.HasKey(e => e.Id).HasName("PK__Orders__3214EC07F4A94D8F");
 
             entity.Property(e => e.OrderDate).HasColumnType("datetime");
             entity.Property(e => e.UserId).HasColumnName("userId");
@@ -68,12 +68,12 @@ public partial class CybageLogisticsContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__userId__21B6055D");
+                .HasConstraintName("FK__Orders__userId__35BCFE0A");
         });
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__OrderDet__3214EC072B3461FE");
+            entity.HasKey(e => e.Id).HasName("PK__OrderDet__3214EC0762226D45");
 
             entity.Property(e => e.OrderStatus)
                 .HasMaxLength(50)
@@ -83,51 +83,51 @@ public partial class CybageLogisticsContext : DbContext
             entity.HasOne(d => d.Inventory).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.InventoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrderDeta__Inven__25869641");
+                .HasConstraintName("FK__OrderDeta__Inven__398D8EEE");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrderDeta__Order__24927208");
+                .HasConstraintName("FK__OrderDeta__Order__38996AB5");
         });
 
         modelBuilder.Entity<Resource>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Resource__3214EC07CEB759BE");
+            entity.HasKey(e => e.Id).HasName("PK__Resource__3214EC07B4A5D4C6");
 
             entity.Property(e => e.IsAvailable).HasDefaultValue(true);
 
             entity.HasOne(d => d.ResourceNavigation).WithMany(p => p.Resources)
                 .HasForeignKey(d => d.ResourceId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Resources__Resou__2C3393D0");
+                .HasConstraintName("FK__Resources__Resou__403A8C7D");
         });
 
         modelBuilder.Entity<ResourceMapping>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Resource__3214EC075A8FB5AE");
+            entity.HasKey(e => e.Id).HasName("PK__Resource__3214EC071F1CB48A");
 
             entity.ToTable("ResourceMapping");
 
             entity.HasOne(d => d.Manager).WithMany(p => p.ResourceMappings)
                 .HasForeignKey(d => d.ManagerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ResourceM__Manag__30F848ED");
+                .HasConstraintName("FK__ResourceM__Manag__44FF419A");
 
             entity.HasOne(d => d.OrderDetails).WithMany(p => p.ResourceMappings)
                 .HasForeignKey(d => d.OrderDetailsId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ResourceM__Order__300424B4");
+                .HasConstraintName("FK__ResourceM__Order__440B1D61");
 
             entity.HasOne(d => d.Resource).WithMany(p => p.ResourceMappings)
                 .HasForeignKey(d => d.ResourceId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ResourceM__Resou__2F10007B");
+                .HasConstraintName("FK__ResourceM__Resou__4316F928");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Roles__3214EC07C3F18F54");
+            entity.HasKey(e => e.Id).HasName("PK__Roles__3214EC07C13F7237");
 
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
@@ -136,7 +136,7 @@ public partial class CybageLogisticsContext : DbContext
 
         modelBuilder.Entity<ShipmentDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Shipment__3214EC0742F02B3E");
+            entity.HasKey(e => e.Id).HasName("PK__Shipment__3214EC076B3D7AC3");
 
             entity.Property(e => e.Destination)
                 .HasMaxLength(300)
@@ -149,14 +149,14 @@ public partial class CybageLogisticsContext : DbContext
             entity.HasOne(d => d.OrderDetails).WithMany(p => p.ShipmentDetails)
                 .HasForeignKey(d => d.OrderDetailsId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ShipmentD__Order__286302EC");
+                .HasConstraintName("FK__ShipmentD__Order__3C69FB99");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07475CAB33");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC0798BB954A");
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D1053432493A24").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534D9406E80").IsUnique();
 
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
@@ -174,14 +174,14 @@ public partial class CybageLogisticsContext : DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Users__RoleId__1920BF5C");
+                .HasConstraintName("FK__Users__RoleId__2D27B809");
         });
 
         modelBuilder.Entity<UserDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UserDeta__3214EC0732307940");
+            entity.HasKey(e => e.Id).HasName("PK__UserDeta__3214EC070F89D260");
 
-            entity.Property(e => e.IsApproved).HasDefaultValue(false);
+            entity.Property(e => e.IsApproved).HasDefaultValue(0);
             entity.Property(e => e.LicenseNumber)
                 .HasMaxLength(300)
                 .IsUnicode(false);
@@ -199,16 +199,16 @@ public partial class CybageLogisticsContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.UserDetails)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UserDetai__UserI__3B75D760");
+                .HasConstraintName("FK__UserDetai__UserI__31EC6D26");
 
             entity.HasOne(d => d.Warehouse).WithMany(p => p.UserDetails)
                 .HasForeignKey(d => d.WarehouseId)
-                .HasConstraintName("FK__UserDetai__Wareh__3C69FB99");
+                .HasConstraintName("FK__UserDetai__Wareh__32E0915F");
         });
 
         modelBuilder.Entity<Warehouse>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Warehous__3214EC072861DB10");
+            entity.HasKey(e => e.Id).HasName("PK__Warehous__3214EC07D630296D");
 
             entity.Property(e => e.Location)
                 .HasMaxLength(50)

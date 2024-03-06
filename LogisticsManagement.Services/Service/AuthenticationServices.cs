@@ -46,16 +46,30 @@ namespace LogisticsManagement.Services.Service
 
                 if (user != null && user.Password == password)
                 {
-                    CurrentUser = new UserSession()
+
+                    Console.WriteLine("anc" + _repository.GetApprovedStatusById(user.Id));
+                    int ApprovedStatus = _repository.GetApprovedStatusById(user.Id);
+
+                    if(ApprovedStatus == 1)
                     {
-                        UserId = user.Id,
-                        UserEmail = user.Email,
-                        Role = user.Role.Name
-                    };
+                        CurrentUser = new UserSession()
+                        {
+                            UserId = user.Id,
+                            UserEmail = user.Email,
+                            Role = user.Role.Name
+                        };
 
-
-                    Console.WriteLine(CurrentUser.UserId + " " + CurrentUser.UserEmail + " " + CurrentUser.Role);
-                    return true;
+                        Console.WriteLine(CurrentUser.UserId + " " + CurrentUser.UserEmail + " " + CurrentUser.Role);
+                        return true;
+                    }
+                    else if (ApprovedStatus == -1)
+                    {
+                        CommonServices.ErrorMessage("Your sign up approval request is rejected");
+                    }
+                    else if (ApprovedStatus == 0)
+                    {
+                        CommonServices.WarningMessage("Your sign up approval request is Pending");
+                    }
                 }
                 else
                 {
@@ -86,7 +100,7 @@ namespace LogisticsManagement.Services.Service
             };
 
 
-            UserDetail? newUserDetail= null;
+            UserDetail? newUserDetail = null;
             if (role == "admin")
             {
                 Console.WriteLine("Logic for admin");
@@ -97,6 +111,8 @@ namespace LogisticsManagement.Services.Service
                 {
                     User = newUser,
                     ShippingAddress = user.ShippingAddress,
+                    WarehouseId = null,
+                    IsApproved = 1,
                 };
             }
             else if (role == "manager")
@@ -105,8 +121,8 @@ namespace LogisticsManagement.Services.Service
                 {
                     User = newUser,
                     WarehouseId = 1,
-                    IsApproved=false
-                    
+                    IsApproved = 0
+
                 };
             }
             else if (role == "driver")
@@ -114,10 +130,11 @@ namespace LogisticsManagement.Services.Service
                 newUserDetail = new UserDetail()
                 {
                     User = newUser,
-                    LicenseNumber=user.LicenseNumber,
-                    VehicleType=user.VehicleType,
-                    VehicleNumber=user.VehicleNumber,
-                    IsApproved=false
+                    LicenseNumber = user.LicenseNumber,
+                    VehicleType = user.VehicleType,
+                    VehicleNumber = user.VehicleNumber,
+                    WarehouseId = null,
+                    IsApproved = 0
                 };
             }
             else

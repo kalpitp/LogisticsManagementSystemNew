@@ -15,6 +15,13 @@ namespace LogisticsManagement.Services.Service
             Console.WriteLine(msg);
             Console.ResetColor();
         }
+        public static void WarningMessage(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
+
         public static void SuccessMessage(string msg)
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;

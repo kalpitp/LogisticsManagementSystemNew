@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogisticsManagement.Services.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -9,9 +10,19 @@ namespace LogisticsManagement.UI
 {
     public class ManagerMenu
     {
+        private readonly IAuthenticationServices _authService;
 
+        public ManagerMenu()
+        {
+
+        }
+
+        public ManagerMenu(IAuthenticationServices authService)
+        {
+            _authService = authService;
+        }
         // Manager main menu
-        public static void ShowMenu()
+        public void ShowMenu()
         {
 
             Console.Clear();
@@ -64,7 +75,7 @@ namespace LogisticsManagement.UI
         //---------------------------------------------------------------------
 
         // Manage Inventory Menu
-        public static void ManageInventoryMenu()
+        public  void ManageInventoryMenu()
         {
             Console.WriteLine("\n<<<<<<< MANAGE INVENTORY >>>>>>>");
             Console.WriteLine("1. View All Products");
@@ -103,7 +114,7 @@ namespace LogisticsManagement.UI
 
 
         // Add Product
-        public static void AddNewProduct()
+        public void AddNewProduct()
         {
             Console.Write("Enter Product Name: ");
             string productName = Console.ReadLine();
@@ -116,7 +127,7 @@ namespace LogisticsManagement.UI
 
 
         // Delete Product
-        public static void DeleteProduct()
+        public void DeleteProduct()
         {
             Console.WriteLine($"\n<<<<<<< DELETE PRODUCT >>>>>>>");
             Console.WriteLine($"1. Delete product");
@@ -144,7 +155,7 @@ namespace LogisticsManagement.UI
 
 
         //----------------------------------------------------------------------
-        public static void AssignDriver()
+        public void AssignDriver()
         {
             Console.WriteLine("\n<<<<<<< ASSIGN DRIVER TO ORDER >>>>>>>");
             Console.WriteLine("Orders\n 1. ord1\n 2.ord2");
@@ -193,7 +204,7 @@ namespace LogisticsManagement.UI
         //----------------------------------------------------------------------
 
         // Update order status
-        public static void UpdateOrderStatus()
+        public void UpdateOrderStatus()
         {
             Console.WriteLine("\n<<<<<<< UPDATE ORDER STATUS >>>>>>>");
 

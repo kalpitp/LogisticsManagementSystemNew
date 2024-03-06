@@ -17,5 +17,6 @@ namespace LogisticsManagement.DataAccess.Repository
         int AddUser(User user, UserDetail userDetail);
 
         int GetRoleIdByName(string roleName);
+        int GetApprovedStatusById(int userId);
     }
 }

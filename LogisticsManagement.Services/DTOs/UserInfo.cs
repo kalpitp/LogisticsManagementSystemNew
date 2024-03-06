@@ -33,6 +33,6 @@ namespace LogisticsManagement.Services.DTOs
 
         public int? WarehouseId { get; set; }
 
-        public bool? IsApproved { get; set; }
+        public int IsApproved { get; set; }
     }
 }

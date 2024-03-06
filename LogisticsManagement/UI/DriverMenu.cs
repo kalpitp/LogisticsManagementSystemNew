@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogisticsManagement.Services.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,19 @@ namespace LogisticsManagement.UI
 {
     public class DriverMenu
     {
-        public static void ShowMenu()
+        private readonly IAuthenticationServices _authService;
+
+        public DriverMenu()
+        {
+
+        }
+
+        public DriverMenu(IAuthenticationServices authService)
+        {
+            _authService = authService;
+        }
+
+        public  void ShowMenu()
         {
             Console.Clear();
             Console.WriteLine("\n<<<<<<< DRIVER MENU >>>>>>>");
@@ -37,7 +50,7 @@ namespace LogisticsManagement.UI
             }
         }
 
-        public static void ViewAssignedOrders()
+        public  void ViewAssignedOrders()
         {
             // Inside the Driver menu
             Console.WriteLine("\n<<<<<<< VIEW ASSIGNED ORDERS >>>>>>>");
@@ -66,7 +79,7 @@ namespace LogisticsManagement.UI
 
         }
 
-        public static void UpdateOrderStatus()
+        public  void UpdateOrderStatus()
         {
             Console.WriteLine("\n<<<<<<< UPDATE ORDER STATUS >>>>>>>");
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogisticsManagement.Services.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,18 @@ namespace LogisticsManagement.UI
 {
     public class AdminMenu
     {
+        private readonly IAuthenticationServices _authService;
 
+        public AdminMenu()
+        {
+
+        }
+        public AdminMenu(IAuthenticationServices authService)
+        {
+            _authService = authService;
+        }
         // Main menu for Admin
-        public static void ShowMenu()
+        public  void ShowMenu()
         {
             Console.Clear();
             Console.WriteLine("\n<<<<<<< ADMIN MENU >>>>>>>");
@@ -48,7 +58,7 @@ namespace LogisticsManagement.UI
         }
 
         // Submenu for manage customer
-        public static void ManageCustomerMenu()
+        public  void ManageCustomerMenu()
         {
             // Manage Customers submenu
             Console.WriteLine("\n<<<<<<< MANAGE CUSTOMER >>>>>>>");
@@ -82,7 +92,7 @@ namespace LogisticsManagement.UI
         }
 
         // Submenu for manage manager
-        public static void ManageManagerMenu()
+        public  void ManageManagerMenu()
         {
             // Manage Customers submenu
             Console.WriteLine("\n<<<<<<< MANAGE WAREHOUSE MANAGER >>>>>>>");
@@ -120,7 +130,7 @@ namespace LogisticsManagement.UI
             }
         }
         // Submenu for manage driver
-        public static void ManageDriverMenu()
+        public  void ManageDriverMenu()
         {
             // Manage Driver submenu
             Console.WriteLine("\n<<<<<<< MANAGE Driver >>>>>>>");
@@ -162,7 +172,7 @@ namespace LogisticsManagement.UI
         //-------------------------------------------------------------------------
 
         //Menu for listing user
-        public static void CommonViewAllUser(string userType)
+        public void CommonViewAllUser(string userType)
         {
             if (userType == "customer")
             {
@@ -191,7 +201,7 @@ namespace LogisticsManagement.UI
         }
 
         // Menu for approval of manager or driver
-        public static void CommonApproveUser(string userType)
+        public void CommonApproveUser(string userType)
         {
 
             Console.WriteLine($"\n<<<<<<< {userType.ToUpper()} SIGNUP APPROVAl >>>>>>>");
@@ -228,7 +238,7 @@ namespace LogisticsManagement.UI
                     break;
             }
         }
-        public static void CommonDeleteUser(string userType)
+        public void CommonDeleteUser(string userType)
         {
             Console.WriteLine($"\n<<<<<<< DELETE {userType.ToUpper()} >>>>>>>");
 

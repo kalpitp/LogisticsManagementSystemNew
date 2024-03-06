@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogisticsManagement.Services.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,22 @@ namespace LogisticsManagement.UI
 {
     public class CustomerMenu
     {
+        private  readonly IAuthenticationServices _authService;
+
+        public CustomerMenu()
+        {
+
+        }
+
+        public CustomerMenu(IAuthenticationServices authService)
+        {
+            _authService = authService;
+        }
 
         // Main customer menu
-        public static void ShowMenu()
+        public  void ShowMenu()
         {
+
             Console.Clear();
 
             Console.WriteLine("\n<<<<<<< CUSTOMER MENU >>>>>>>>");
@@ -49,7 +62,7 @@ namespace LogisticsManagement.UI
         // Product
             
         // Submenu for View Product
-        public static void ProductMenu()
+        public  void ProductMenu()
         {
             //Console.Clear();
             Console.WriteLine("product1\nproduct2\nproduct3");
@@ -79,7 +92,7 @@ namespace LogisticsManagement.UI
         }
 
         // Submenu for product details
-        public static void ProductDetailsMenu(int sNo=0)
+        public  void ProductDetailsMenu(int sNo=0)
         {
             Console.WriteLine("\n<<<<<<< PRODUCT DETAILS >>>>>>>>");
             Console.WriteLine($"Name:");
@@ -117,7 +130,7 @@ namespace LogisticsManagement.UI
         }
 
         // Submenu for buy product
-        public static void BuyProductMenu()
+        public  void BuyProductMenu()
         {
             // When the user selects "Buy Product"
             Console.WriteLine("\n<<<<<<< BUY PRODUCT >>>>>>>>");
@@ -153,7 +166,7 @@ namespace LogisticsManagement.UI
         //ORDER
 
         // Submenu for View order
-        public static void OrderMenu()
+        public  void OrderMenu()
         {
             Console.WriteLine("order1\norder2\norder3");
 
@@ -182,7 +195,7 @@ namespace LogisticsManagement.UI
         }
 
         // Submenu for order details
-        public static void OrderDetailsMenu(int sNo=0)
+        public  void OrderDetailsMenu(int sNo=0)
         {
             Console.WriteLine("\n<<<<<<< ORDER DETAILS >>>>>>>>");
             Console.WriteLine($"Order ID:");

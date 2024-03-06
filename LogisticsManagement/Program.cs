@@ -20,8 +20,8 @@ namespace LogisticsManagement
         {
             var serviceProvider = new ServiceCollection()
                 .AddDbContext<CybageLogisticsContext>()
-                .AddSingleton<IAuthenticationServices, AuthenticationServices>()
-                .AddSingleton<IAuthenticationRepository, AuthenticationRepository>()
+                .AddScoped<IAuthenticationServices, AuthenticationServices>()
+                .AddScoped<IAuthenticationRepository, AuthenticationRepository>()
                 .BuildServiceProvider();
 
             var authService = serviceProvider.GetService<IAuthenticationServices>();
@@ -35,18 +35,20 @@ namespace LogisticsManagement
                 Console.WriteLine("\n1. Login");
                 Console.WriteLine("2. Register");
                 Console.WriteLine("3. Exit");
+                //Console.WriteLine(authService.CurrentUser?.UserId + authService.CurrentUser?.Role);
+
 
                 Console.WriteLine("\nPlease enter your choice: ");
                 int choice;
                 while (!int.TryParse(Console.ReadLine(), out choice))
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Invalid input. Please enter a valid integer.");
+                    Console.WriteLine("Invalid input. Please enter a valid integer:");
                     Console.ResetColor();
                 }
                 
                 AuthenticationMenu authMenu= new AuthenticationMenu(authService);
-
+                //CustomerMenu customerMenu= new CustomerMenu(authService);
                 //CustomerMenu.ShowMenu();
 
                 //ManagerMenu.ShowMenu();

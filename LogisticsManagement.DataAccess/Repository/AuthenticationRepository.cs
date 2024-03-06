@@ -22,7 +22,7 @@ namespace LogisticsManagement.DataAccess.Repository
         // get user by user id
         public User GetUserByUserId(string userId)
         {
-           return  _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Email == userId);
+           return  _context.Users.Include(u => u.Role).Include(u=>u.UserDetails).FirstOrDefault(u => u.Email == userId);
         }
 
         // Add user to database
@@ -54,6 +54,12 @@ namespace LogisticsManagement.DataAccess.Repository
 
             // If role is found, return Id, else return a default value 
             return role?.Id ?? -1;
+        }
+
+        public int GetApprovedStatusById(int userId)
+        {
+            var userDetails = _context.UserDetails.FirstOrDefault(u => u.UserId == userId);
+            return userDetails != null ? Convert.ToInt32( userDetails.IsApproved) : 0; // Return IsApproved value or 0
         }
     }
 }

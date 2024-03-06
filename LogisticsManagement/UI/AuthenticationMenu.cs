@@ -67,10 +67,10 @@ namespace LogisticsManagement.UI
                 if (isSuccess)
                 {
                     CommonServices.SuccessMessage("Login Successfull");
-                    if (_authService.CurrentUser.Role == "admin") AdminMenu.ShowMenu();
-                    else if (_authService.CurrentUser.Role == "manager") ManagerMenu.ShowMenu();
-                    else if (_authService.CurrentUser.Role == "customer") CustomerMenu.ShowMenu();
-                    else if (_authService.CurrentUser.Role == "driver") DriverMenu.ShowMenu();
+                    if (_authService.CurrentUser.Role == "admin") new AdminMenu(_authService).ShowMenu();
+                    else if (_authService.CurrentUser.Role == "manager") new ManagerMenu(_authService).ShowMenu();
+                    else if (_authService.CurrentUser.Role == "customer") new CustomerMenu(_authService).ShowMenu();
+                    else if (_authService.CurrentUser.Role == "driver") new DriverMenu(_authService).ShowMenu();
                     else Console.WriteLine("Invalid Role!! No menu to display");
 
                 }
@@ -175,7 +175,7 @@ namespace LogisticsManagement.UI
 
             if (isSuccess)
             {
-                Login();
+                return;
             }
             else
             {
@@ -186,14 +186,15 @@ namespace LogisticsManagement.UI
         public void ManagerDetails()
         {
             CommonDetails();
-            Console.Write("Enter Warehouse Name: ");
-            string? warehouseName = Console.ReadLine();
+            //Console.Write("Enter Warehouse Name: ");
+            //string? warehouseName = Console.ReadLine();
 
             bool isSuccess = _authService.SignUp(info, "manager");
 
             if (isSuccess)
             {
-                Login();
+                //Login();
+                return;
             }
             else
             {
@@ -220,7 +221,7 @@ namespace LogisticsManagement.UI
 
             if (isSuccess)
             {
-                Login();
+                return;
             }
             else
             {
